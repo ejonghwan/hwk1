@@ -13,6 +13,7 @@ class App extends Component {
         info: [],
     }
 
+    
 
     handleChange = (e) => {
         this.setState({
@@ -41,9 +42,19 @@ class App extends Component {
         })
     }
 
-    handleUpdate = (id) => {
+    handleUpdate = (id, item) => {
         this.setState({
-
+            info: this.state.info.map( val => {
+                if(val.id === id) {
+                    return {
+                        ...val,
+                        name: item.name,
+                        password: item.password,
+                    }
+                } else {
+                    return val
+                }
+            })
         })
     }
 

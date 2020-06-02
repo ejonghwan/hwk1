@@ -9,6 +9,12 @@ class Item extends Component {
     }
 
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if(this.state.info !== nextProps) {
+            
+    //     }
+    // }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
@@ -26,13 +32,31 @@ class Item extends Component {
     }
 
     handleUpdate = () => {
+        const { info } = this.props;
+
+        
+        this.setState({
+            updateBox: !this.state.updateBox
+        })
+
+        this.setState({
+            name: info.name,
+            password: info.password,
+        })
+        console.log(this.state.updateBox)
+    }
+
+    handleCompl = (e) => {
         const { info, onUpdate } = this.props;
         this.setState({
             updateBox: !this.state.updateBox
         })
-        onUpdate(info.id)
-
-        console.log(this.state.updateBox)
+        this.setState({
+            name: info.name,
+            password: info.password,
+        })
+        
+        onUpdate(info.id, {name: this.state.name, password: this.state.password})
     }
 
     render() {
@@ -54,10 +78,16 @@ class Item extends Component {
                         />
                     </form>
                     :
-                    <div>{info.name}{info.password}</div>
+                    <div>name: {info.name}<br />password: {info.password}</div>
                 } 
                 <button onClick={this.handleRemove}>remove</button>
-                <button onClick={this.handleUpdate}>updete</button>
+                {
+                    this.state.updateBox ? 
+                    <button onClick={this.handleCompl}>ok</button>
+                    :
+                    <button onClick={this.handleUpdate}>update</button>
+                }
+                
             </div>
         )
     }
