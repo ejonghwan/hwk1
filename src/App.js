@@ -10,7 +10,7 @@ class App extends Component {
     state = {
         name: '',
         password: '',
-        info: [],
+        info: ['asdasd', 'asdasdsad'],
     }
 
     
